@@ -136,7 +136,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -190,6 +190,10 @@ MonoBehaviour:
   initialMoodAmount: 0.7
   _goodAmount: 0.1
   _badAmount: 0.5
+  timeToWait: 5
+  decreaseRate: 0.01
+  favoriteDrink: 1
+  favoriteDrinkBonus: 4
 --- !u!1 &5121515664053014628
 GameObject:
   m_ObjectHideFlags: 0

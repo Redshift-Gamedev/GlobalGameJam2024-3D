@@ -12,7 +12,12 @@ namespace GlobalGameJam.UI
             barImage = GetComponent<Image>();
         }
 
-        protected void UpdateBarImage(float newAmount)
+        protected virtual void UpdateBarImage(float newAmount)
+        {
+            barImage.fillAmount = newAmount;
+        }
+
+        protected virtual void UpdateBarImage(float newAmount, MoodState moodState)
         {
             barImage.fillAmount = newAmount;
         }
