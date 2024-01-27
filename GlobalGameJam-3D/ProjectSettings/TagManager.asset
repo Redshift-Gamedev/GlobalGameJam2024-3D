@@ -7,6 +7,9 @@ TagManager:
   - NpcLight
   - NpcMedium
   - NpcHeavy
+  - BeerBullet
+  - WineBullet
+  - SuperAlcoholBullet
   layers:
   - Default
   - TransparentFX
