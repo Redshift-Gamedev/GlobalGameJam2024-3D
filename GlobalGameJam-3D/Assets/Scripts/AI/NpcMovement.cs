@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,7 +28,7 @@ namespace GlobalGameJam.AI
                 targetTransform = Tavern.Instance.GetNearestEntryPoint(transform.position).transform;
                 agent.SetDestination(targetTransform.position);
                 yield return new WaitForSeconds(timeToCheck);
-            }      
+            }
         }
     }
 }
