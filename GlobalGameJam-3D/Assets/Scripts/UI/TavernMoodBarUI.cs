@@ -1,26 +1,16 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace GlobalGameJam.UI
 {
-    public class TavernMoodBarUI : MonoBehaviour
+    public class TavernMoodBarUI : MoodBarUI
     {
-        private Image barImage;
-
-        private void Awake()
+        protected override void Awake()
         {
-            barImage = GetComponent<Image>();
+            base.Awake();
             TavernMood.OnMoodChanged += UpdateBarImage;
         }
 
         private void OnDestroy()
         {
             TavernMood.OnMoodChanged -= UpdateBarImage;
-        }
-
-        private void UpdateBarImage(float newAmount)
-        {
-            barImage.fillAmount = newAmount;
         }
     }
 }

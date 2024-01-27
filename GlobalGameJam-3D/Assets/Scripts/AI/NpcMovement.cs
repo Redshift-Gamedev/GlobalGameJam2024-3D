@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,6 +8,7 @@ namespace GlobalGameJam.AI
     {
         private NavMeshAgent agent;
         private Transform targetTransform;
+        [Tooltip("How many seconds should pass from destination checks.")]
         [SerializeField, Min(0.01f)] private float timeToCheck = .5f;
 
         private void Awake()
@@ -16,9 +16,14 @@ namespace GlobalGameJam.AI
             agent = GetComponent<NavMeshAgent>();   
         }
 
-        private void Start()
+        private void OnEnable()
         {
             StartCoroutine(MoveToDestination());          
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
         }
 
         private IEnumerator MoveToDestination()

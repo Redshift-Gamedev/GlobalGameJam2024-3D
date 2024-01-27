@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c7830268a3f5148b2d05692ef803e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialMoodAmount: 0.5
+  initialMoodAmount: 0.7
   _goodAmount: 0.1
   _badAmount: 0.1
 --- !u!1 &5121515664053014628
@@ -257,13 +257,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e89ff800f486d3343a1b3db331d1c772, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &8336323846368072940
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5550f7c55a8dcda4984827c2e6272e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcMood: {fileID: 637373937268053370}
 --- !u!1 &5995111578365239255
 GameObject:
   m_ObjectHideFlags: 0
