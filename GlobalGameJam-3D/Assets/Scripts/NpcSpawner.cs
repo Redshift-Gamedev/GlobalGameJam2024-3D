@@ -13,9 +13,31 @@ namespace GlobalGameJam
         [SerializeField] private float minTimeToWait;
         [SerializeField] private float maxTimeToWait;
 
+        private void Awake()
+        {
+            PauseListener.OnGamePauseStateChanged += HandleComponent;
+        }
+
         private void Start()
         {
             InvokeRepeating(nameof(SpawnNpc), 0, Random.Range(minTimeToWait, maxTimeToWait));
+        }
+
+        private void OnDestroy()
+        {
+            PauseListener.OnGamePauseStateChanged -= HandleComponent;
+        }
+
+        private void HandleComponent(bool isPaused)
+        {
+            if (isPaused)
+            {
+                CancelInvoke();
+            }
+            else
+            {
+                InvokeRepeating(nameof(SpawnNpc), 0, Random.Range(minTimeToWait, maxTimeToWait));
+            }
         }
 
         private void SpawnNpc()

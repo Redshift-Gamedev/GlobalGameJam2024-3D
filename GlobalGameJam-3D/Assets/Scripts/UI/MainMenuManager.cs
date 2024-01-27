@@ -11,19 +11,6 @@ public class MainMenuManager : MonoBehaviour
         //SceneManager.LoadScene(1) TODO;
     }
 
-    public void OnOptionsButton() 
-    {
-        
-    }
-
-    public void OnGuideButton() 
-    { 
-    
-    }
-    public void OnCreditsButton() 
-    { 
-    
-    }
     public void OnQuitButton ()
     {
         Application.Quit();

@@ -1,76 +1,96 @@
 //Source: https://www.youtube.com/watch?v=qQLvcS9FxnY&ab_channel=AllThingsGameDev
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
-public class FPSController : MonoBehaviour
+namespace GlobalGameJam
 {
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private float walkSpeed = 6f;
-    [SerializeField] private float runSpeed = 12f;
-    [SerializeField] private float jumpPower = 7f;
-    [SerializeField] private float gravity = 10f;
-
-    [SerializeField] private float lookSpeed = 2f;
-    [SerializeField] private float lookXLimit = 45f;
-
-    private Vector3 moveDirection = Vector3.zero;
-    private float rotationX = 0;
-
-    [SerializeField] private bool canMove = true;
-
-    private CharacterController characterController;
-
-    private void Start()
+    [RequireComponent(typeof(CharacterController))]
+    public class FPSController : MonoBehaviour
     {
-        characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        [SerializeField] private Camera playerCamera;
+        [SerializeField] private float walkSpeed = 6f;
+        [SerializeField] private float runSpeed = 12f;
+        [SerializeField] private float jumpPower = 7f;
+        [SerializeField] private float gravity = 10f;
 
-    private void Update()
-    {
+        [SerializeField] private float lookSpeed = 2f;
+        [SerializeField] private float lookXLimit = 45f;
 
-        #region Handles Movement
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
+        private Vector3 moveDirection = Vector3.zero;
+        private float rotationX = 0;
 
-        // Press Left Shift to run
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        [SerializeField] private bool canMove = true;
 
-        #endregion
+        private CharacterController characterController;
 
-        #region Handles Jumping
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        private void Awake()
         {
-            moveDirection.y = jumpPower;
-        }
-        else
-        {
-            moveDirection.y = movementDirectionY;
+            characterController = GetComponent<CharacterController>();
+            PauseListener.OnGamePauseStateChanged += HandleComponent;
         }
 
-        if (!characterController.isGrounded)
+        private void Start()
         {
-            moveDirection.y -= gravity * Time.deltaTime;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
-        #endregion
-
-        #region Handles Rotation
-        characterController.Move(moveDirection * Time.deltaTime);
-
-        if (canMove)
+        private void Update()
         {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+
+            #region Handles Movement
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
+
+            // Press Left Shift to run
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
+            float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+            float movementDirectionY = moveDirection.y;
+            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+
+            #endregion
+
+            #region Handles Jumping
+            if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+            {
+                moveDirection.y = jumpPower;
+            }
+            else
+            {
+                moveDirection.y = movementDirectionY;
+            }
+
+            if (!characterController.isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            #endregion
+
+            #region Handles Rotation
+            characterController.Move(moveDirection * Time.deltaTime);
+
+            if (canMove)
+            {
+                rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+                rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+                transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            }
+
+            #endregion
         }
 
-        #endregion
+        private void OnDestroy()
+        {
+            PauseListener.OnGamePauseStateChanged -= HandleComponent;
+        }
+
+        private void HandleComponent(bool isPaused)
+        {
+            enabled = !isPaused;
+            Cursor.visible = isPaused;
+            Cursor.lockState = isPaused ? CursorLockMode.Confined : CursorLockMode.Locked;
+        }
     }
 }

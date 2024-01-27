@@ -13,7 +13,8 @@ namespace GlobalGameJam.AI
 
         private void Awake()
         {
-            agent = GetComponent<NavMeshAgent>();   
+            agent = GetComponent<NavMeshAgent>();
+            PauseListener.OnGamePauseStateChanged += HandleComponent;
         }
 
         private void OnEnable()
@@ -24,6 +25,31 @@ namespace GlobalGameJam.AI
         private void OnDisable()
         {
             StopAllCoroutines();
+        }
+
+        private void OnDestroy()
+        {
+            PauseListener.OnGamePauseStateChanged -= HandleComponent;
+        }
+
+
+        private void HandleComponent(bool isPaused)
+        {
+            if (isPaused)
+            {
+                StopAllCoroutines();             
+            }
+            else
+            {
+                if (gameObject.activeInHierarchy)
+                {
+                    StartCoroutine(MoveToDestination());
+                }
+            }
+            if (agent.hasPath)
+            {
+                agent.isStopped = isPaused;
+            }
         }
 
         private IEnumerator MoveToDestination()
