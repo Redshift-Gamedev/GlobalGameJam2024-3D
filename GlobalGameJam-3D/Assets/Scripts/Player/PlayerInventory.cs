@@ -5,6 +5,7 @@ namespace GlobalGameJam
 {
     public class PlayerInventory : MonoBehaviour
     {
+        public static event Action<int[]> OnAmmoAmountChanged = delegate { };
         public static event Action OnAmmoRefilled = delegate { };
         public static event Action<int> OnAmmoSelected = delegate { };
 
@@ -41,6 +42,12 @@ namespace GlobalGameJam
         private void Awake()
         {
             //RefillTrigger.OnPlayerEnterTrigger += RefillAmmo; //Subscribe to RefillTrigger event
+        }
+
+        private void Start()
+        {
+            OnAmmoSelected?.Invoke(_currentSelectedAmmo);
+            OnAmmoAmountChanged?.Invoke(ammoAmounts);
         }
 
         private void Update()
@@ -88,6 +95,7 @@ namespace GlobalGameJam
             if (ammoAmounts[CurrentSelectedAmmo] > 0)
             {
                 ammoAmounts[CurrentSelectedAmmo]--;
+                OnAmmoAmountChanged?.Invoke(ammoAmounts);
                 return CurrentSelectedAmmo;
             }
             else
@@ -106,6 +114,8 @@ namespace GlobalGameJam
                 if(ammoAmounts[i] != maxAmmoAmount)
                 {
                     ammoAmounts[i] = maxAmmoAmount;
+                    OnAmmoAmountChanged?.Invoke(ammoAmounts);
+
                     refilled = true;
                 }
             }

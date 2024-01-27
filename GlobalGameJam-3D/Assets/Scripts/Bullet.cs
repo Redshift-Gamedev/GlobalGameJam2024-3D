@@ -10,13 +10,13 @@ namespace GlobalGameJam
         [SerializeField] private BulletType bulletType;
 
         [SerializeField] private float speed;
-        [SerializeField, Range(0f, 1f)] private float _efficiency;
+        [SerializeField, Range(0f, 1f)] private float _efficiency = .1f;
 
         private Rigidbody rb;
 
         public BulletType BulletType => bulletType;
 
-        public float Efficiency => _efficiency = .1f;
+        public float Efficiency => _efficiency;
 
         private void Awake()
         {
