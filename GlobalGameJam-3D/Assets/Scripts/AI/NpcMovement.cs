@@ -18,7 +18,7 @@ namespace GlobalGameJam.AI
 
         private void OnEnable()
         {
-            StartCoroutine(MoveToDestination());          
+            StartCoroutine(MoveToDestination());
         }
 
         private void OnDisable()

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 76995162720894203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.76}
+  m_LocalPosition: {x: 0.36, y: 0, z: 0.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3909842774508271113}
   - component: {fileID: 1253928069661345427}
   - component: {fileID: 9031169231097797433}
+  - component: {fileID: 1921590477719364192}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -126,7 +127,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9323930dcd2b96e4ba25f1b56b4bee17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoTags:
+  - BeerBullet
+  - WineBullet
+  - SuperAlcoholBullet
   muzzleTransform: {fileID: 2279741319177164856}
+  reloadTime: 1
+--- !u!114 &1921590477719364192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2939324281373642486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f873e1442798d4f9ac39d45417340c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmoAmount: 5
+  ammoAmounts: 000000000000000000000000
+  _currentSelectedAmmo: 0
 --- !u!1 &3171865504009162857
 GameObject:
   m_ObjectHideFlags: 0

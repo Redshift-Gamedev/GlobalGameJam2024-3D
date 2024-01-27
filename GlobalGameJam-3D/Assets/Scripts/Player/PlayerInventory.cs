@@ -5,32 +5,42 @@ namespace GlobalGameJam
 {
     public class PlayerInventory : MonoBehaviour
     {
-        //public static event 
+        public static event Action OnAmmoRefilled = delegate { };
+        public static event Action<int> OnAmmoSelected = delegate { };
+
+        [Tooltip("Maximum amount of variety of bullets")]
+        [SerializeField] private int maxAmmoVariety = 3;
+
         [Tooltip("Maximum amount of allowed bullets")]
         [SerializeField] private int maxAmmoAmount;
 
         [Tooltip("Amount of each ammo")]
-        [SerializeField] private int[] ammoAmount;
+        [SerializeField] private int[] ammoAmounts;
 
         //Current selected ammo index
-        private int _currentSelectedAmmo = 0;
+        [SerializeField] private int _currentSelectedAmmo = 0;
 
         public int CurrentSelectedAmmo 
         { 
             get => _currentSelectedAmmo;
             set
             {
-                int maxAmmo = 2;
-                if(value > maxAmmo)
+                if(value >= maxAmmoVariety)
                 {
                     value = 0;
                 }
                 else if(value < 0)
                 {
-                    value = maxAmmo;
+                    value = maxAmmoVariety-1;
                 }
-                _currentSelectedAmmo = Mathf.Clamp(value, 0, maxAmmo);
+                _currentSelectedAmmo = Mathf.Clamp(value, 0, maxAmmoVariety-1);
+                OnAmmoSelected?.Invoke(_currentSelectedAmmo);
             }
+        }
+
+        private void Awake()
+        {
+            //RefillTrigger.OnPlayerEnterTrigger += RefillAmmo; //Subscribe to RefillTrigger event
         }
 
         private void Update()
@@ -38,6 +48,11 @@ namespace GlobalGameJam
             HandleMouseScrolling();
             HandleKeyboard();
 
+        }
+
+        private void OnDestroy()
+        {
+            //RefillTrigger.OnPlayerEnterTrigger -= RefillAmmo; //Unsubscribe to RefillTrigger event
         }
 
         private void HandleKeyboard()
@@ -68,14 +83,36 @@ namespace GlobalGameJam
             }
         }
 
-        public bool TakeAmmo(BulletType bulletType)
+        public int TakeAmmo()
         {
-            if (ammoAmount[(int)bulletType] > 0)
+            if (ammoAmounts[CurrentSelectedAmmo] > 0)
             {
-                ammoAmount[(int)bulletType]--;
-                return true;
+                ammoAmounts[CurrentSelectedAmmo]--;
+                return CurrentSelectedAmmo;
             }
-            return false;
+            else
+            {
+                //Ammo is empty
+                Debug.Log($"ammoAmounts[CurrentSelectedAmmo {CurrentSelectedAmmo}]: {ammoAmounts[CurrentSelectedAmmo]}");
+                return -1;
+            }
+        }
+
+        public void RefillAmmo()
+        {
+            bool refilled = false;
+            for (int i = 0; i < ammoAmounts.Length; i++)
+            {
+                if(ammoAmounts[i] != maxAmmoAmount)
+                {
+                    ammoAmounts[i] = maxAmmoAmount;
+                    refilled = true;
+                }
+            }
+            if (refilled)
+            {
+                OnAmmoRefilled?.Invoke();
+            }
         }
     }
 }
