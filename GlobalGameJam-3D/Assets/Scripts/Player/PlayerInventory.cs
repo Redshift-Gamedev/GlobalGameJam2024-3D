@@ -59,15 +59,15 @@ namespace GlobalGameJam
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                CurrentSelectedAmmo = 1;
+                CurrentSelectedAmmo = 0;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                CurrentSelectedAmmo = 2;
+                CurrentSelectedAmmo = 1;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                CurrentSelectedAmmo = 3;
+                CurrentSelectedAmmo = 2;
             }
         }
 
