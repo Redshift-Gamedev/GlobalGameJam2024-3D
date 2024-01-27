@@ -14,6 +14,8 @@ namespace GlobalGameJam
 
         private Rigidbody rb;
 
+        private Vector3 currentVelocity;
+
         public BulletType BulletType => bulletType;
 
         public float Efficiency => _efficiency;
@@ -21,11 +23,13 @@ namespace GlobalGameJam
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            PauseListener.OnGamePauseStateChanged += PauseBullet;
         }
 
         private void OnEnable()
         {
             rb.velocity = transform.forward * speed;
+            currentVelocity = rb.velocity;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -37,6 +41,18 @@ namespace GlobalGameJam
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            currentVelocity = rb.velocity;
+        }
+
+        private void OnDestroy()
+        {
+            PauseListener.OnGamePauseStateChanged -= PauseBullet;
+        }
+
+        private void PauseBullet(bool isPaused)
+        {
+            rb.velocity = isPaused ? Vector3.zero : currentVelocity;
+            rb.useGravity = !isPaused;
         }
     }
 }

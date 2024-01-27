@@ -42,6 +42,12 @@ namespace GlobalGameJam
         private void Awake()
         {
             //RefillTrigger.OnPlayerEnterTrigger += RefillAmmo; //Subscribe to RefillTrigger event
+            PauseListener.OnGamePauseStateChanged += HandleComponent;
+        }
+
+        private void HandleComponent(bool isPaused)
+        {
+            enabled = !isPaused;
         }
 
         private void Start()

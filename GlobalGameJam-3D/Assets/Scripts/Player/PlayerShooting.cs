@@ -23,6 +23,12 @@ namespace GlobalGameJam
         {
             inventory = GetComponent<PlayerInventory>();
             cam = Camera.main;
+            PauseListener.OnGamePauseStateChanged += HandleComponent;
+        }
+
+        private void HandleComponent(bool isPaused)
+        {
+            enabled = !isPaused;
         }
 
         private void Start()
@@ -44,6 +50,11 @@ namespace GlobalGameJam
                 currentReloadTime = reloadTime;
                 canShoot = false;
             }
+        }
+
+        private void OnDestroy()
+        {
+            PauseListener.OnGamePauseStateChanged -= HandleComponent;
         }
 
         private void Shoot()
