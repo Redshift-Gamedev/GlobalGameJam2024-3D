@@ -14,6 +14,7 @@ namespace GlobalGameJam
             {
                 isPaused = !isPaused;
                 OnGamePauseStateChanged?.Invoke(isPaused);
+                Time.timeScale = isPaused ? 0f : 1f;
             }
         }
     }
