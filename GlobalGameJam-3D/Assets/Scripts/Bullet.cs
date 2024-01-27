@@ -10,10 +10,13 @@ namespace GlobalGameJam
         [SerializeField] private BulletType bulletType;
 
         [SerializeField] private float speed;
+        [SerializeField, Range(0f, 1f)] private float _efficiency;
 
         private Rigidbody rb;
 
         public BulletType BulletType => bulletType;
+
+        public float Efficiency => _efficiency = .1f;
 
         private void Awake()
         {
@@ -23,6 +26,11 @@ namespace GlobalGameJam
         private void OnEnable()
         {
             rb.velocity = transform.forward * speed;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            gameObject.SetActive(false);
         }
 
         private void OnDisable()

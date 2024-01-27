@@ -1,17 +1,38 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace GlobalGameJam
 {
+    public enum MoodState { Sober, Dizzy, Drunk }
+
     public class NpcMood : Mood
     {
-        public event Action<float> OnMoodChanged = delegate { };
+        public event Action<float, MoodState> OnMoodChanged = delegate { };
 
         [Tooltip("Amount of mood to increase Tavern's Mood")]
         [SerializeField, Range(.001f, 1f)] private float _goodAmount;
 
         [Tooltip("Amount of mood to decrease Tavern's Mood")]
         [SerializeField, Range(.001f, 1f)] private float _badAmount;
+
+        [Header("Thresholds")]
+        private static Interval badInterval;
+        private static Interval normalInterval;
+
+        [Header("Timer")]
+        [Tooltip("Time to wait after last change of mood before decrementing")]
+        [SerializeField] private float timeToWait;
+        [Tooltip("Amount to decrease each second")]
+        [SerializeField] private float decreaseRate = .05f;
+        private bool canDecreaseMood = true;
+
+        [Header("Favorite stats")]
+        [SerializeField] private BulletType favoriteDrink;
+        [Tooltip("Multiplicative Bonus (x2, x3, etc.)")]
+        [SerializeField] private float favoriteDrinkBonus;
+
+        private MoodState _moodState;
 
         public float GoodAmount => _goodAmount;
         public float BadAmount => _badAmount;
@@ -22,8 +43,77 @@ namespace GlobalGameJam
             protected set
             {
                 base.MoodAmount = value;
-                OnMoodChanged?.Invoke(MoodAmount);
+                if(_moodAmount < badInterval.MaxValue)
+                {
+                    _moodState = MoodState.Sober;
+                }
+                else if(_moodAmount < normalInterval.MaxValue)
+                {
+                    _moodState = MoodState.Dizzy;
+                }
+                else
+                {
+                    _moodState = MoodState.Drunk;
+                }
+                OnMoodChanged?.Invoke(MoodAmount, MoodState);
             }
+        }
+
+        public MoodState MoodState => _moodState;
+
+        private void Start()
+        {
+            badInterval.MinValue = 0f;
+            badInterval.MaxValue = .33f;
+
+            normalInterval.MinValue = .331f;
+            normalInterval.MaxValue = .66f;
+
+            favoriteDrinkBonus = 4;
+        }
+
+        private void Update()
+        {
+            if(canDecreaseMood)
+            {
+                if(MoodAmount > 0f)
+                {
+                    MoodAmount -= decreaseRate * Time.deltaTime;
+                }
+                if(MoodAmount == 0f)
+                {
+                    canDecreaseMood = false;
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+            canDecreaseMood = true;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.collider.gameObject.TryGetComponent(out Bullet bullet))
+            {
+                if(favoriteDrink == bullet.BulletType)
+                {
+                    MoodAmount += bullet.Efficiency * favoriteDrinkBonus;
+                }
+                else
+                {
+                    MoodAmount += bullet.Efficiency;
+                }
+                StartCoroutine(WaitForDecrease());
+            }
+        }
+
+        private IEnumerator WaitForDecrease()
+        {
+            canDecreaseMood = false;
+            yield return new WaitForSeconds(timeToWait);
+            canDecreaseMood = true;
         }
     }
 }

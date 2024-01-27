@@ -9,11 +9,6 @@ namespace GlobalGameJam
         public static event Action<float> OnMoodChanged = delegate { };
         public static event Action OnMoodLost = delegate { };
 
-        [Header("Thresholds")]
-        [SerializeField] private Interval badInterval;
-        [SerializeField] private Interval normalInterval;
-        [SerializeField] private Interval goodInterval;
-
         public override float MoodAmount
         {
             get => base.MoodAmount;
@@ -41,11 +36,11 @@ namespace GlobalGameJam
 
         private void UpdateMood(NpcMood npcMood)
         {
-            if(npcMood.MoodAmount < badInterval.MaxValue)
+            if(npcMood.MoodState is MoodState.Sober)
             {
                 MoodAmount -= npcMood.BadAmount;
             }
-            else if(npcMood.MoodAmount > normalInterval.MaxValue)
+            else if(npcMood.MoodState is MoodState.Drunk)
             {
                 MoodAmount += npcMood.GoodAmount;
             }
