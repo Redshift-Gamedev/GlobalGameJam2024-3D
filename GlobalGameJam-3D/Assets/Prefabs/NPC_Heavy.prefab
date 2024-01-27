@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c7830268a3f5148b2d05692ef803e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialMoodAmount: 0.7
+  initialMoodAmount: 0
   _goodAmount: 0.1
   _badAmount: 0.1
   timeToWait: 5

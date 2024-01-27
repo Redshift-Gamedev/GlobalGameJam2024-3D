@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletType: 0
   speed: 20
+  _efficiency: 0.1
