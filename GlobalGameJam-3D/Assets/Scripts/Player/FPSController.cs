@@ -29,9 +29,9 @@ namespace GlobalGameJam
 
         private CharacterController characterController;
 
-        private AudioSource audioSource;
-        private AudioClip runClip;
-        private AudioClip walkClip;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip runClip;
+        [SerializeField] private AudioClip walkClip;
 
         private void Awake()
         {
@@ -60,13 +60,19 @@ namespace GlobalGameJam
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
             if(curSpeedX != 0f || curSpeedY != 0f)
             {
-                audioSource.clip
+                audioSource.clip = isRunning ? runClip : walkClip;
+                if(!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+                
             }
             else
             {
-                Debug.Log("OnPlayerStopped");
+                audioSource.Stop();
+                audioSource.clip = null;
 
-                OnPlayerStopped?.Invoke();
+                //OnPlayerStopped?.Invoke();
             }
 
             #endregion
