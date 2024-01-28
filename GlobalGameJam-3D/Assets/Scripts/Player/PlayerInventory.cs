@@ -61,6 +61,8 @@ namespace GlobalGameJam
         private void OnDestroy()
         {
             //RefillTrigger.OnPlayerEnterTrigger -= RefillAmmo; //Unsubscribe to RefillTrigger event
+            PauseListener.OnGamePauseStateChanged -= HandleComponent;
+
         }
 
         private void HandleComponent(bool isPaused)

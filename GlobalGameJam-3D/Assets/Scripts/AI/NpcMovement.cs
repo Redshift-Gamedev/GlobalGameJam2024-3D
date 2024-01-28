@@ -36,7 +36,10 @@ namespace GlobalGameJam.AI
         {
             if (isPaused)
             {
-                agent.isStopped = true;
+                if (agent.hasPath)
+                {
+                    agent.isStopped = true;
+                }
                 StopAllCoroutines();             
             }
             else
