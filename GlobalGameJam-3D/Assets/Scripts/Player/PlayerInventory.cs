@@ -49,6 +49,7 @@ namespace GlobalGameJam
         {
             OnAmmoSelected?.Invoke(_currentSelectedAmmo);
             OnAmmoAmountChanged?.Invoke(ammoAmounts);
+            RefillAmmo();
         }
 
         private void Update()

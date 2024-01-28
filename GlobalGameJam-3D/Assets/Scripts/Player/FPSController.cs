@@ -7,6 +7,8 @@ namespace GlobalGameJam
     public class FPSController : MonoBehaviour
     {
         public static event System.Action<bool> OnPlayerMoving = delegate { };
+        public static event System.Action OnPlayerJumping = delegate { };
+
         public static event System.Action OnPlayerStopped = delegate { };
 
         [SerializeField] private Camera playerCamera;
@@ -28,10 +30,6 @@ namespace GlobalGameJam
         [SerializeField] private bool canMove = true;
 
         private CharacterController characterController;
-
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip runClip;
-        [SerializeField] private AudioClip walkClip;
 
         private void Awake()
         {
@@ -60,19 +58,11 @@ namespace GlobalGameJam
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
             if(curSpeedX != 0f || curSpeedY != 0f)
             {
-                audioSource.clip = isRunning ? runClip : walkClip;
-                if(!audioSource.isPlaying)
-                {
-                    audioSource.Play();
-                }
-                
+                OnPlayerMoving?.Invoke(isRunning);   
             }
             else
             {
-                audioSource.Stop();
-                audioSource.clip = null;
-
-                //OnPlayerStopped?.Invoke();
+                OnPlayerStopped?.Invoke();
             }
 
             #endregion
@@ -80,6 +70,7 @@ namespace GlobalGameJam
             #region Handles Jumping
             if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
             {
+                OnPlayerJumping?.Invoke();
                 moveDirection.y = jumpPower;
             }
             else
