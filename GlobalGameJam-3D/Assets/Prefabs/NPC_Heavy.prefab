@@ -190,10 +190,10 @@ MonoBehaviour:
   initialMoodAmount: 0
   _goodAmount: 0.1
   _badAmount: 0.1
-  timeToWait: 5
-  decreaseRate: 0.01
+  timeToWait: 2
+  decreaseRate: 0.07
   favoriteDrink: 2
-  favoriteDrinkBonus: 4
+  favoriteDrinkBonus: 3
 --- !u!1 &5121515664053014628
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2966610009593339399}
   - component: {fileID: 5280652421743304003}
-  - component: {fileID: 3544028253425309487}
+  - component: {fileID: 3655589193026414738}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -420,7 +420,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &3544028253425309487
+--- !u!114 &3655589193026414738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,20 +429,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6310616114258125928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 11500000, guid: 8afbb469d258c254a95010983acf59bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
 --- !u!1 &8447140015977615891
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,12 +473,12 @@ AudioSource:
   m_GameObject: {fileID: 8447140015977615891}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4004486394712711593, guid: 8a399d174b6ac8d418214c452e83d098, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 7c7460705244c014e807eee34006353d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -531,7 +520,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

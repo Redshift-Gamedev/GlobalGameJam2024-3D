@@ -12,7 +12,7 @@ namespace GlobalGameJam.UI
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void SetPanelVisibility(bool isVisible)
+        public virtual void SetPanelVisibility(bool isVisible)
         {
             canvasGroup.alpha = isVisible ? 1f : 0f;
             canvasGroup.blocksRaycasts = isVisible;

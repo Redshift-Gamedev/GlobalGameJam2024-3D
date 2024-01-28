@@ -73,8 +73,6 @@ namespace GlobalGameJam
 
             normalInterval.MinValue = .331f;
             normalInterval.MaxValue = .66f;
-
-            favoriteDrinkBonus = 4;
         }
 
         private void Update()
@@ -105,10 +103,14 @@ namespace GlobalGameJam
                 if(favoriteDrink == bullet.BulletType)
                 {
                     MoodAmount += bullet.Efficiency * favoriteDrinkBonus;
+                    Debug.Log($"{MoodAmount} = {bullet.Efficiency} * {favoriteDrinkBonus} ({favoriteDrink})");
+
                 }
                 else
                 {
                     MoodAmount += bullet.Efficiency;
+                    Debug.Log($"{MoodAmount} = {bullet.Efficiency} ({bullet.BulletType})");
+
                 }
                 StartCoroutine(WaitForDecrease());
             }

@@ -31,5 +31,13 @@ namespace GlobalGameJam.UI
         {
             SceneManager.LoadScene(0);
         }
+
+        public override void SetPanelVisibility(bool isVisible)
+        {
+            if (!PauseListener.isLostGame)
+            {
+                base.SetPanelVisibility(isVisible);
+            }
+        }
     }
 }

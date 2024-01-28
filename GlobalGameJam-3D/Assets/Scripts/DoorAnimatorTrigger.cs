@@ -5,12 +5,27 @@ namespace GlobalGameJam
     public class DoorAnimatorTrigger : MonoBehaviour
     {
         [SerializeField] private DoorAnimation doorAnimator;
+        private bool isDoorOpen;
+
+        private void Awake()
+        {
+            doorAnimator.OnDoorClosed += AvailableToOpen;
+        }
+
+        private void OnDestroy()
+        {
+            doorAnimator.OnDoorClosed -= AvailableToOpen;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if(other.TryGetComponent(out NpcMood npc))
             {
-                doorAnimator.OpenDoor();
+                if (!isDoorOpen)
+                {
+                    doorAnimator.OpenDoor();
+                    isDoorOpen = true;
+                }
             }
         }
 
@@ -20,6 +35,11 @@ namespace GlobalGameJam
             {
                 doorAnimator.CloseDoor();
             }
+        }
+
+        private void AvailableToOpen()
+        {
+            isDoorOpen = false;
         }
     }
 }

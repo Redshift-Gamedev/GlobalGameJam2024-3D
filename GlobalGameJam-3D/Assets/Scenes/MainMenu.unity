@@ -653,6 +653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 75332332441533093, guid: bba13270fbf466f41b2fba1064035ff0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2210893254894843711, guid: bba13270fbf466f41b2fba1064035ff0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -733,6 +737,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7626581779006841906, guid: bba13270fbf466f41b2fba1064035ff0, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626581779006841906, guid: bba13270fbf466f41b2fba1064035ff0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: afff6c9185da35b4891f562bd07d2660, type: 3}
+    - target: {fileID: 7626581779006841906, guid: bba13270fbf466f41b2fba1064035ff0, type: 3}
+      propertyPath: m_Color.a
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8568748328745446368, guid: bba13270fbf466f41b2fba1064035ff0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 6
@@ -782,6 +798,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1964870505}
     m_Modifications:
+    - target: {fileID: 791580217231203388, guid: 603c6438679f66b48b814f9d17b00155, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 791580217231203388, guid: 603c6438679f66b48b814f9d17b00155, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: afff6c9185da35b4891f562bd07d2660, type: 3}
+    - target: {fileID: 791580217231203388, guid: 603c6438679f66b48b814f9d17b00155, type: 3}
+      propertyPath: m_Color.a
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7589574884667501717, guid: 603c6438679f66b48b814f9d17b00155, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1042,6 +1070,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: GlobalGameJam.UI.Panel, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 8135753861555747437, guid: ae3cf8f2ee6958c4c9720a46f1357b18, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135753861555747437, guid: ae3cf8f2ee6958c4c9720a46f1357b18, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: afff6c9185da35b4891f562bd07d2660, type: 3}
+    - target: {fileID: 8135753861555747437, guid: ae3cf8f2ee6958c4c9720a46f1357b18, type: 3}
+      propertyPath: m_Color.a
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8768404000893600356, guid: ae3cf8f2ee6958c4c9720a46f1357b18, type: 3}
       propertyPath: m_Name
       value: CreditsMenu
@@ -1202,29 +1242,33 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: GlobalGameJam.UI.Panel, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 2138420125472315225, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2704732636028507906, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2704732636028507906, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2704732636028507906, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1052
       objectReference: {fileID: 0}
     - target: {fileID: 2704732636028507906, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 132.8
       objectReference: {fileID: 0}
     - target: {fileID: 2704732636028507906, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 2704732636028507906, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -274.2
       objectReference: {fileID: 0}
     - target: {fileID: 3026595382660903906, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1277,6 +1321,18 @@ PrefabInstance:
     - target: {fileID: 4496148866384154959, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487917826635647152, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487917826635647152, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: afff6c9185da35b4891f562bd07d2660, type: 3}
+    - target: {fileID: 5487917826635647152, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
+      propertyPath: m_Color.a
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5710446204830483593, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1356,7 +1412,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8529469729221835076, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_text
-      value: IT'S DRUNKING TIME
+      value: Raise the Spirits
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529469729221835076, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529469729221835076, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8807912747562859184, guid: 1461a981f223fe74098091cbbe6ade44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -9,13 +9,16 @@ namespace GlobalGameJam
         private static bool isPaused = false;
         private bool canListenInput = true;
 
+        public static bool isLostGame;
+
         private void Awake()
         {
-            TavernMood.OnMoodLost += PauseGame;
+            TavernMood.OnMoodLost += LostGame;
         }
 
         private void Start()
         {
+            isLostGame = false;
             SetPauseState(false);
             canListenInput = true;
         }
@@ -30,12 +33,13 @@ namespace GlobalGameJam
 
         private void OnDestroy()
         {
-            TavernMood.OnMoodLost -= PauseGame;
+            TavernMood.OnMoodLost -= LostGame;
             SetPauseState(false);
         }
 
-        private void PauseGame()
+        private void LostGame()
         {
+            isLostGame = true;
             SetPauseState(true);
             canListenInput = false;
         }

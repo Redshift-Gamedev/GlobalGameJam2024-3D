@@ -5,26 +5,35 @@ namespace GlobalGameJam
 {
     public class Timer : MonoBehaviour
     {
-        public float timeRemaining = 0;
+        private float _timeElapsed = 0;
         public bool timerIsRunning = false;
         public TextMeshProUGUI timeText;
+
+        public float TimeElapsed 
+        { 
+            get => _timeElapsed;
+            private set => _timeElapsed = value;
+        }
+
         private void Start()
         {
             // Starts the timer automatically
             timerIsRunning = true;
         }
+
         private void Update()
         {
             if (timerIsRunning)
             {
-                if (timeRemaining >= 0)
+                if (TimeElapsed >= 0)
                 {
-                    timeRemaining += Time.deltaTime;
-                    DisplayTime(timeRemaining);
+                    TimeElapsed += Time.deltaTime;
+                    DisplayTime(TimeElapsed);
                 }
             }
         }
-        void DisplayTime(float timeToDisplay)
+
+        public void DisplayTime(float timeToDisplay)
         {
             timeToDisplay += 1;
             float minutes = Mathf.FloorToInt(timeToDisplay / 60);

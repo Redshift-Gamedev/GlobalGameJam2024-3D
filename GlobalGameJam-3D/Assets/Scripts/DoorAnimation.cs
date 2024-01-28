@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class DoorAnimation : MonoBehaviour
 {
+    public event Action OnDoorOpened = delegate { };
+    public event Action OnDoorClosed = delegate { };
     [SerializeField] private float lerpDuration = 0.5f;
 
     public void OpenDoor()
@@ -22,6 +25,7 @@ public class DoorAnimation : MonoBehaviour
             yield return null;
         }
         transform.localRotation = targetRotation;
+        OnDoorOpened?.Invoke();
     }
 
     public void CloseDoor()
@@ -41,5 +45,6 @@ public class DoorAnimation : MonoBehaviour
             yield return null;
         }
         transform.localRotation = targetRotation;
+        OnDoorClosed?.Invoke();
     }
 }
