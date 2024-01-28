@@ -47,11 +47,9 @@ namespace GlobalGameJam
 
         public static void SetPauseState(bool newPausedState)
         {
-            Debug.Log($"Before {isPaused}");
             isPaused = newPausedState;
             OnGamePauseStateChanged?.Invoke(isPaused);
             Time.timeScale = isPaused ? 0f : 1f;
-            Debug.Log($"After {isPaused}");
         }
     }
 }
