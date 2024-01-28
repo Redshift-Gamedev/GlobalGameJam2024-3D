@@ -10,6 +10,9 @@ namespace GlobalGameJam
         private bool canRefill = true;
         private float currentTime;
 
+        [Tooltip("Animator of the corresponding window")]
+        [SerializeField] private Animator animator;
+
         private void Start()
         {
             currentTime = reloadTime;
@@ -23,6 +26,7 @@ namespace GlobalGameJam
                 if(currentTime < 0f)
                 {
                     canRefill = true;
+                    animator.SetTrigger("OpenWindow");
                     currentTime = reloadTime;
                 }
             }
@@ -35,6 +39,7 @@ namespace GlobalGameJam
                 if (canRefill)
                 {
                     playerInventory.RefillAmmo();
+                    animator.SetTrigger("CloseWindow");
                     canRefill = false;
                 }
                 //OnPlayerEnterTrigger?.Invoke();
