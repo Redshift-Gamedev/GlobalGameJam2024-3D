@@ -43,15 +43,15 @@ namespace GlobalGameJam
             protected set
             {
                 base.MoodAmount = value;
-                if(_moodAmount < badInterval.MaxValue)
+                if(_moodAmount >= badInterval.MinValue && _moodAmount <= badInterval.MaxValue)
                 {
                     _moodState = MoodState.Sober;
                 }
-                else if(_moodAmount < normalInterval.MaxValue)
+                else if(_moodAmount >= normalInterval.MinValue && _moodAmount <= normalInterval.MaxValue)
                 {
                     _moodState = MoodState.Dizzy;
                 }
-                else
+                else if (_moodAmount > normalInterval.MaxValue )
                 {
                     _moodState = MoodState.Drunk;
                 }
@@ -60,6 +60,11 @@ namespace GlobalGameJam
         }
 
         public MoodState MoodState => _moodState;
+
+        protected override void OnEnable()
+        {
+            MoodAmount = initialMoodAmount;
+        }
 
         private void Start()
         {

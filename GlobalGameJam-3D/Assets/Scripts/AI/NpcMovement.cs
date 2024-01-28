@@ -32,11 +32,11 @@ namespace GlobalGameJam.AI
             PauseListener.OnGamePauseStateChanged -= HandleComponent;
         }
 
-
         private void HandleComponent(bool isPaused)
         {
             if (isPaused)
             {
+                agent.isStopped = true;
                 StopAllCoroutines();             
             }
             else
@@ -44,6 +44,7 @@ namespace GlobalGameJam.AI
                 if (gameObject.activeInHierarchy)
                 {
                     StartCoroutine(MoveToDestination());
+                    agent.isStopped = false;
                 }
             }
             if (agent.hasPath)

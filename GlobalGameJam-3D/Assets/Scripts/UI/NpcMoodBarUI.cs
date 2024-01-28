@@ -30,6 +30,7 @@ namespace GlobalGameJam.UI
                 MoodState.Sober => low,
                 MoodState.Dizzy => medium,
                 MoodState.Drunk => high,
+                _ => throw new System.NotImplementedException()
             };
         }
     }

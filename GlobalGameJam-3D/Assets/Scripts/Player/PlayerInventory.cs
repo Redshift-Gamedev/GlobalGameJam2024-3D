@@ -45,11 +45,6 @@ namespace GlobalGameJam
             PauseListener.OnGamePauseStateChanged += HandleComponent;
         }
 
-        private void HandleComponent(bool isPaused)
-        {
-            enabled = !isPaused;
-        }
-
         private void Start()
         {
             OnAmmoSelected?.Invoke(_currentSelectedAmmo);
@@ -66,6 +61,11 @@ namespace GlobalGameJam
         private void OnDestroy()
         {
             //RefillTrigger.OnPlayerEnterTrigger -= RefillAmmo; //Unsubscribe to RefillTrigger event
+        }
+
+        private void HandleComponent(bool isPaused)
+        {
+            enabled = !isPaused;
         }
 
         private void HandleKeyboard()
@@ -110,6 +110,18 @@ namespace GlobalGameJam
                 Debug.Log($"ammoAmounts[CurrentSelectedAmmo {CurrentSelectedAmmo}]: {ammoAmounts[CurrentSelectedAmmo]}");
                 return -1;
             }
+        }
+
+        public bool IsFull()
+        {
+            foreach(int ammoAmount in ammoAmounts)
+            {
+                if(ammoAmount < maxAmmoAmount)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void RefillAmmo()

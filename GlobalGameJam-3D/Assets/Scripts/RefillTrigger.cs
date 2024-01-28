@@ -7,26 +7,41 @@ namespace GlobalGameJam
     {
         //public static event Action OnPlayerEnterTrigger = delegate { };
         [SerializeField] private float reloadTime;
-        private bool canRefill = true;
+        [SerializeField] private WindowAnimation windowAnimator;
+        private bool _canRefill = true;
         private float currentTime;
 
-        [Tooltip("Animator of the corresponding window")]
-        [SerializeField] private Animator animator;
+        public bool CanRefill 
+        {
+            get => _canRefill;
+            set
+            {
+                _canRefill = value;
+                if(_canRefill)
+                {
+                    windowAnimator.OpenWindow();
+                }
+                else
+                {
+                    windowAnimator.CloseWindow();
+                }
+            }
+        }
 
         private void Start()
         {
             currentTime = reloadTime;
+            CanRefill = true;
         }
 
         private void Update()
         {
-            if(!canRefill)
+            if(!CanRefill)
             {
                 currentTime -= Time.deltaTime;
                 if(currentTime < 0f)
                 {
-                    canRefill = true;
-                    animator.SetTrigger("OpenWindow");
+                    CanRefill = true;
                     currentTime = reloadTime;
                 }
             }
@@ -36,11 +51,13 @@ namespace GlobalGameJam
         {
             if(other.TryGetComponent(out PlayerInventory playerInventory))
             {
-                if (canRefill)
+                if (CanRefill)
                 {
-                    playerInventory.RefillAmmo();
-                    animator.SetTrigger("CloseWindow");
-                    canRefill = false;
+                    if (!playerInventory.IsFull())
+                    {
+                        playerInventory.RefillAmmo();
+                        CanRefill = false;
+                    }
                 }
                 //OnPlayerEnterTrigger?.Invoke();
             }

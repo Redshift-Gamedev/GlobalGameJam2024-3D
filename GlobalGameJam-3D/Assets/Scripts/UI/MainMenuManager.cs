@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MainMenuManager : MonoBehaviour
+namespace GlobalGameJam.UI
 {
-    public void OnPlayButton()
+    public class MainMenuManager : MonoBehaviour
     {
-        //SceneManager.LoadScene(1) TODO;
-    }
+        public void OnPlayButton()
+        {
+            //SceneManager.LoadScene(1) TODO;
+        }
 
-    public void OnQuitButton ()
-    {
-        Application.Quit();
+        public void OnQuitButton()
+        {
+            Application.Quit();
+        }
     }
-
 }

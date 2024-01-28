@@ -6,16 +6,21 @@ namespace GlobalGameJam
     public class PauseListener : MonoBehaviour
     {
         public static event Action<bool> OnGamePauseStateChanged = delegate { };
-        private bool isPaused = false;
+        private static bool isPaused = false;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                isPaused = !isPaused;
-                OnGamePauseStateChanged?.Invoke(isPaused);
-                Time.timeScale = isPaused ? 0f : 1f;
+                SetPauseState(!isPaused);
             }
+        }
+
+        public static void SetPauseState(bool newPausedState)
+        {
+            isPaused = newPausedState;
+            OnGamePauseStateChanged?.Invoke(isPaused);
+            Time.timeScale = isPaused ? 0f : 1f;
         }
     }
 }
