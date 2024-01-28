@@ -191,9 +191,9 @@ MonoBehaviour:
   _goodAmount: 0.1
   _badAmount: 0.1
   timeToWait: 5
-  decreaseRate: 0.01
+  decreaseRate: 0.02
   favoriteDrink: 0
-  favoriteDrinkBonus: 4
+  favoriteDrinkBonus: 10
 --- !u!1 &5121515664053014628
 GameObject:
   m_ObjectHideFlags: 0

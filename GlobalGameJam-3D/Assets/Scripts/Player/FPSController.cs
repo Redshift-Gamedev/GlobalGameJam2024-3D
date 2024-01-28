@@ -6,6 +6,9 @@ namespace GlobalGameJam
     [RequireComponent(typeof(CharacterController))]
     public class FPSController : MonoBehaviour
     {
+        public static event System.Action<bool> OnPlayerMoving = delegate { };
+        public static event System.Action OnPlayerStopped = delegate { };
+
         [SerializeField] private Camera playerCamera;
         [SerializeField] private float walkSpeed = 6f;
         [SerializeField] private float runSpeed = 12f;
@@ -18,9 +21,17 @@ namespace GlobalGameJam
         private Vector3 moveDirection = Vector3.zero;
         private float rotationX = 0;
 
+        float curSpeedX;
+        float curSpeedY;
+        float movementDirectionY;
+
         [SerializeField] private bool canMove = true;
 
         private CharacterController characterController;
+
+        private AudioSource audioSource;
+        private AudioClip runClip;
+        private AudioClip walkClip;
 
         private void Awake()
         {
@@ -43,10 +54,20 @@ namespace GlobalGameJam
 
             // Press Left Shift to run
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-            float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-            float movementDirectionY = moveDirection.y;
+            curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
+            curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+            movementDirectionY = moveDirection.y;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+            if(curSpeedX != 0f || curSpeedY != 0f)
+            {
+                audioSource.clip
+            }
+            else
+            {
+                Debug.Log("OnPlayerStopped");
+
+                OnPlayerStopped?.Invoke();
+            }
 
             #endregion
 
