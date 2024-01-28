@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9877770893fb62047a1f0286066418f7
+guid: c11af9e82e5051f43a5bdf29d12e6bc2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: walking mid-drunk
+      name: drunk walk
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 37
+      lastFrame: 75
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
