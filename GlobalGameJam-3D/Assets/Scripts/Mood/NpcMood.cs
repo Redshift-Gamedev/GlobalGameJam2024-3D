@@ -1,3 +1,6 @@
+#define DEBUG
+//#undef DEBUG
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -32,6 +35,8 @@ namespace GlobalGameJam
         [Tooltip("Multiplicative Bonus (x2, x3, etc.)")]
         [SerializeField] private float favoriteDrinkBonus;
 
+        private Animator npcAnimator;
+
         private MoodState _moodState;
 
         public float GoodAmount => _goodAmount;
@@ -55,6 +60,7 @@ namespace GlobalGameJam
                 {
                     _moodState = MoodState.Drunk;
                 }
+                npcAnimator.SetFloat("Mood", _moodAmount);
                 OnMoodChanged?.Invoke(MoodAmount, MoodState);
             }
         }
@@ -64,6 +70,11 @@ namespace GlobalGameJam
         protected override void OnEnable()
         {
             MoodAmount = initialMoodAmount;
+        }
+
+        private void Awake()
+        {
+            npcAnimator = GetComponent<Animator>();
         }
 
         private void Start()
@@ -103,14 +114,16 @@ namespace GlobalGameJam
                 if(favoriteDrink == bullet.BulletType)
                 {
                     MoodAmount += bullet.Efficiency * favoriteDrinkBonus;
+#if DEBUG
                     Debug.Log($"{MoodAmount} = {bullet.Efficiency} * {favoriteDrinkBonus} ({favoriteDrink})");
-
+#endif
                 }
                 else
                 {
                     MoodAmount += bullet.Efficiency;
+#if DEBUG
                     Debug.Log($"{MoodAmount} = {bullet.Efficiency} ({bullet.BulletType})");
-
+#endif
                 }
                 StartCoroutine(WaitForDecrease());
             }
