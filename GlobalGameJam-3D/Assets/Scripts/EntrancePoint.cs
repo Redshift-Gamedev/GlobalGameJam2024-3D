@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using GlobalGameJam.AI;
 
 namespace GlobalGameJam
 {
@@ -10,7 +9,7 @@ namespace GlobalGameJam
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out NpcMood npcMood))
+            if(other.transform.parent.TryGetComponent(out NpcMood npcMood))
             {
                 OnClientEntered?.Invoke(npcMood);
 

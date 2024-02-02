@@ -1350,9 +1350,10 @@ GameObject:
   - component: {fileID: 276792919181205155}
   - component: {fileID: 8435569741437563621}
   - component: {fileID: 5001407969941441156}
+  - component: {fileID: 7172044857398683411}
   - component: {fileID: 3280951029693408410}
   - component: {fileID: 840747263659833909}
-  - component: {fileID: 7172044857398683411}
+  - component: {fileID: 344811761671526897}
   m_Layer: 6
   m_Name: OmettoRiggato_Medium
   m_TagString: NpcMedium
@@ -1428,6 +1429,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &7172044857398683411
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5334224802733870749}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0111c785e594ee242a92d826a0b8dab5, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9902562fdcbf55a4698cdd717a7d4f1d, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3280951029693408410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,27 +1482,21 @@ MonoBehaviour:
   decreaseRate: 0.07
   favoriteDrink: 0
   favoriteDrinkBonus: 3
---- !u!95 &7172044857398683411
-Animator:
-  serializedVersion: 5
+--- !u!114 &344811761671526897
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5334224802733870749}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0111c785e594ee242a92d826a0b8dab5, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9902562fdcbf55a4698cdd717a7d4f1d, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae89dab01b090b4c8c25bc85b097530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drunkSpeedMultiplier: 2
+  buzzedSpeedMultiplier: 2.25
+  soberSpeedMultiplier: 1
 --- !u!1 &5536384268714210239
 GameObject:
   m_ObjectHideFlags: 0

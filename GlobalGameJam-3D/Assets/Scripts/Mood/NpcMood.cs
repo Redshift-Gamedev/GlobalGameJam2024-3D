@@ -60,7 +60,6 @@ namespace GlobalGameJam
                 {
                     _moodState = MoodState.Drunk;
                 }
-                npcAnimator.SetFloat("Mood", _moodAmount);
                 OnMoodChanged?.Invoke(MoodAmount, MoodState);
             }
         }

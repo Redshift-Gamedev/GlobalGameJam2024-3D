@@ -1,45 +1,33 @@
+using System;
 using UnityEngine;
 
 namespace GlobalGameJam
 {
     public class DoorAnimatorTrigger : MonoBehaviour
     {
-        [SerializeField] private DoorAnimation doorAnimator;
-        private bool isDoorOpen;
-
-        private void Awake()
-        {
-            doorAnimator.OnDoorClosed += AvailableToOpen;
-        }
-
-        private void OnDestroy()
-        {
-            doorAnimator.OnDoorClosed -= AvailableToOpen;
-        }
+        public event Action OnDoorTriggerEnter = delegate { };
+        public event Action OnDoorTriggerExit = delegate { };
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out NpcMood npc))
+            if (other.transform.parent)
             {
-                if (!isDoorOpen)
+                if (other.transform.parent.TryGetComponent(out NpcMood npc))
                 {
-                    doorAnimator.OpenDoor();
-                    isDoorOpen = true;
+                    OnDoorTriggerEnter?.Invoke();
                 }
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out NpcMood npc))
+            if (other.transform.parent)
             {
-                doorAnimator.CloseDoor();
+                if (other.transform.parent.TryGetComponent(out NpcMood npc))
+                {
+                    OnDoorTriggerExit?.Invoke();
+                }
             }
-        }
-
-        private void AvailableToOpen()
-        {
-            isDoorOpen = false;
         }
     }
 }

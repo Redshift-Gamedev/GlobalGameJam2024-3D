@@ -1,3 +1,6 @@
+#define DEBUG
+#undef DEBUG
+
 using System;
 using UnityEngine;
 
@@ -110,7 +113,9 @@ namespace GlobalGameJam
             else
             {
                 //Ammo is empty
+#if DEBUG
                 Debug.Log($"ammoAmounts[CurrentSelectedAmmo {CurrentSelectedAmmo}]: {ammoAmounts[CurrentSelectedAmmo]}");
+#endif
                 return -1;
             }
         }

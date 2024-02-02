@@ -1,50 +1,38 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
-public class DoorAnimation : MonoBehaviour
-{
-    public event Action OnDoorOpened = delegate { };
-    public event Action OnDoorClosed = delegate { };
-    [SerializeField] private float lerpDuration = 0.5f;
-
-    public void OpenDoor()
+namespace GlobalGameJam
+{ 
+    public class DoorAnimation : MonoBehaviour
     {
-        StartCoroutine(OpenDoorAnimation());
-    }
+        [SerializeField] private DoorAnimatorTrigger doorTrigger;
+        [SerializeField] private float animationSpeedMultiplier = 1f;
 
-    private IEnumerator OpenDoorAnimation()
-    {
-        float timeElapsed = 0;
-        Quaternion startRotation = transform.localRotation;
-        Quaternion targetRotation = transform.localRotation * Quaternion.Euler(0, -90, 0);
-        while (timeElapsed < lerpDuration)
+        private Animator animator;
+
+        private void Awake()
         {
-            transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, timeElapsed / lerpDuration);
-            timeElapsed += Time.deltaTime;
-            yield return null;
+            animator = GetComponent<Animator>();
+
+            doorTrigger.OnDoorTriggerEnter += OpenDoor;
+            doorTrigger.OnDoorTriggerExit += CloseDoor;
         }
-        transform.localRotation = targetRotation;
-        OnDoorOpened?.Invoke();
-    }
 
-    public void CloseDoor()
-    {
-        StartCoroutine(CloseDoorAnimation());
-    }
-
-    private IEnumerator CloseDoorAnimation()
-    {
-        float timeElapsed = 0;
-        Quaternion startRotation = transform.localRotation;
-        Quaternion targetRotation = transform.localRotation * Quaternion.Euler(0, 90, 0);
-        while (timeElapsed < lerpDuration)
+        private void OnDestroy()
         {
-            transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, timeElapsed / lerpDuration);
-            timeElapsed += Time.deltaTime;
-            yield return null;
+            doorTrigger.OnDoorTriggerEnter -= OpenDoor;
+            doorTrigger.OnDoorTriggerExit -= CloseDoor;
         }
-        transform.localRotation = targetRotation;
-        OnDoorClosed?.Invoke();
+
+        private void OpenDoor()
+        {
+            animator.SetFloat("Speed", animationSpeedMultiplier);
+            animator.SetTrigger("OpenDoor");
+        }
+
+        private void CloseDoor()
+        {
+            animator.SetFloat("Speed", animationSpeedMultiplier);
+            animator.SetTrigger("CloseDoor");
+        }
     }
 }
