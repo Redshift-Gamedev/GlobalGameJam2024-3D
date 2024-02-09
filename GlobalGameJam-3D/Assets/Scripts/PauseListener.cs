@@ -6,6 +6,7 @@ namespace GlobalGameJam
     public class PauseListener : MonoBehaviour
     {
         public static event Action<bool> OnGamePauseStateChanged = delegate { };
+        public static event Action<bool> OnPauseButtonPressed = delegate { };
         private static bool isPaused = false;
         private bool canListenInput = true;
 
@@ -27,6 +28,7 @@ namespace GlobalGameJam
         {
             if (canListenInput && Input.GetKeyDown(KeyCode.Escape))
             {
+                OnPauseButtonPressed?.Invoke(!isPaused);
                 SetPauseState(!isPaused);
             }
         }
